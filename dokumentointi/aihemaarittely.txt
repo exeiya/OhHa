@@ -1,0 +1,15 @@
+
+Aihe: Tetris
+
+Yksinkertainen Tetris-pelin toteutus, jossa eri muotoisia palikkakuvioita
+tippuu yksi kerrallaan alas kent‰n yl‰p‰‰st‰ ja ne kasautuvat pohjalle. Pelaaja ohjaa
+palikoita ja k‰‰ntelee niit‰, kunnes ne ovat tippuneet pohjalle saakka.
+
+Palikkakuvioita voi k‰‰nt‰‰ liikuttaa kent‰ll‰ sivusuunnassa, 
+kunnes ne osuvat pohjaan tai p‰‰llimm‰isin‰ oleviin palikoihin. 
+Kun yksi rivi on t‰ynn‰ palikoita, se katoaa ja pelaaja saa pisteit‰. 
+Rivin katoamisen j‰lkeen sen yl‰puolella olevat palikat tippuvat rivin alemmaksi.
+
+Pelin tarkoituksena on ker‰t‰ mahdollisimman paljon pisteit‰. Peli p‰‰ttyy,
+kun palikat ylettyv‰t kent‰n yl‰p‰‰h‰n saakka, eli uusia palikoita ei mahdu
+en‰‰ tippumaan alas.
