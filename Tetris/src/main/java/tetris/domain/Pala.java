@@ -23,14 +23,24 @@ public class Pala {
          this.x += x;
          this.y += y;
     }
-    
-    public String toString(){
-        return this.x + "," + this.y;
-    }
-    
     public void kaanna(int x, int y){
         int vanhaX = this.x;
         this.x = x - this.y + y;
         this.y = y - vanhaX + x;
+    }
+    
+    public boolean osuuPalaan(Pala toinen){
+        return this.x == toinen.x && this.y == toinen.y;
+    }
+    
+    public boolean osuuReunaan(int x){
+        if (this.x == x){
+            return true;
+        }
+        return false;
+    }
+    
+    public String toString(){
+        return this.x + "," + this.y;
     }
 }

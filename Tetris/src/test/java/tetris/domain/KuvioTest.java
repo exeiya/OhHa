@@ -7,30 +7,33 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import tetris.Suunta;
 
 public class KuvioTest {
+    
+    Kuvio kuvio;
     
     public KuvioTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() {
+        kuvio = new Kuvio();
     }
     
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    @Test
+    public void setSuuntaToimii(){
+        kuvio.setSuunta(Suunta.VASEN);
+        assertEquals(kuvio.getSuunta(), Suunta.VASEN);
+    }
+    
+    @Test
+    public void siirryToimii(){
+        
+    }
 }

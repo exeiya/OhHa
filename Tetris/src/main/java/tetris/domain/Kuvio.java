@@ -1,38 +1,78 @@
-
 package tetris.domain;
 
-import tetris.domain.Pala;
 import java.util.*;
+import tetris.Suunta;
 
 public class Kuvio {
+
     private List<Pala> palat;
-    
-    public Kuvio(){
-        this.palat = new ArrayList<Pala>();
+    private Suunta suunta;
+    private int kuvionTyyppi;
+
+    public Kuvio() {
+        this.palat = new ArrayList<>();
+        this.suunta = Suunta.ALAS;
     }
-    
-    public void lisaaPala(Pala pala){
+
+    public void lisaaPala(Pala pala) {
         palat.add(pala);
     }
-    
-    public void siirry(int x, int y){
-        for (Pala pala : palat){
-            pala.siirry(x, y);
+
+    public void siirry() {
+        if (this.suunta == Suunta.ALAS) {
+            siirraPalat(0, 30);
+        }
+        if (this.suunta == Suunta.VASEN) {
+            siirraPalat(-30, 0);
+        } 
+        if (this.suunta == Suunta.OIKEA ) {
+            siirraPalat(30, 0);
         }
     }
     
-    public void kaanna(){
+    public void siirraPalat(int x, int y){
+        for (Pala pala : palat) {
+                pala.siirry(x, y);
+            }
+    }
+    
+    public boolean osuuPalaan(Pala pala2){
+        
+        return false;
+    }
+    
+    public boolean osuuReunaan(int x){
+        for (Pala pala : this.palat){
+            if (pala.osuuReunaan(x)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void kaanna() {
         int x = palat.get(0).getX();
         int y = palat.get(0).getY();
-        for (Pala pala: palat){
+        for (Pala pala : palat) {
             pala.kaanna(x, y);
         }
     }
+
+    public void setSuunta(Suunta suunta) {
+        this.suunta = suunta;
+    }
+
+    public List<Pala> getPalat() {
+        return this.palat;
+    }
     
-    public void tulosta(){
-        for (Pala pala: palat){
+    public Suunta getSuunta(){
+        return this.suunta;
+    }
+
+    public void tulosta() {
+        for (Pala pala : palat) {
             System.out.println(pala);
         }
     }
-    
 }
