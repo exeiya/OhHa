@@ -1,3 +1,5 @@
 Päiväys		Käytetty aika		Ajankäytön kohde
 
-23.1.2014	10h			Ohjelman rakenteen suunnittelu, koodauksen aloitus
+23.1.2014	10h			Ohjelman rakenteen suunnittelua, koodauksen aloitus
+28.2.2014	7h			Lisää koodausta
+30.2.2014	2h			-||-
