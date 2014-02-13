@@ -26,7 +26,7 @@ public class Pala {
     public void kaanna(int x, int y){
         int vanhaX = this.x;
         this.x = x - this.y + y;
-        this.y = y - vanhaX + x;
+        this.y = y + vanhaX - x;
     }
     
     public boolean osuuPalaan(Pala toinen){
@@ -38,6 +38,13 @@ public class Pala {
             return true;
         }
         return false;
+    }
+    
+    public boolean osuuPohjaan(){
+        if (this.y >= 570){
+            return true;
+        }
+       return false;
     }
     
     public String toString(){

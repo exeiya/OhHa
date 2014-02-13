@@ -33,6 +33,11 @@ public class KuvioTest {
     }
     
     @Test
+    public void lisaaPalaToimii(){
+        this.kuvio.lisaaPala(new Pala(0,0));
+    }
+    
+    @Test
     public void siirryToimii(){
         
     }

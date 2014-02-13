@@ -36,14 +36,39 @@ public class Kuvio {
             }
     }
     
-    public boolean osuuPalaan(Pala pala2){
-        
+    public Kuvio luoTestikuvio(){
+        Kuvio testik = new Kuvio();
+        testik.palat.clear();
+        for (Pala p : this.palat){
+            testik.lisaaPala(new Pala(p.getX(), p.getY()));
+        }
+        return testik;
+    }
+    
+    public boolean osuuPalaan(Pala toinen){
+        Kuvio testik = luoTestikuvio();
+        testik.setSuunta(suunta);
+        testik.siirry();
+        for (Pala pala : testik.palat){
+            if (pala.osuuPalaan(toinen)){
+                return true;
+            }
+        }
         return false;
     }
     
     public boolean osuuReunaan(int x){
         for (Pala pala : this.palat){
             if (pala.osuuReunaan(x)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean osuuPohjaan(){
+        for (Pala pala : this.palat){
+            if (pala.osuuPohjaan()){
                 return true;
             }
         }
