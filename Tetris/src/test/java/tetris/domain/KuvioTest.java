@@ -33,12 +33,34 @@ public class KuvioTest {
     }
     
     @Test
+    public void getSuuntaToimii(){
+        assertEquals(kuvio.getSuunta(), Suunta.ALAS);
+    }
+    
+    @Test
     public void lisaaPalaToimii(){
         this.kuvio.lisaaPala(new Pala(0,0));
     }
     
     @Test
-    public void siirryToimii(){
-        
+    public void getPalatToimii(){
+        kuvio.lisaaPala(new Pala(0,0));
+        kuvio.lisaaPala(new Pala(30,30));
+        assertEquals(kuvio.getPalat().get(0).getY(), 0);
+        assertEquals(kuvio.getPalat().get(1).getY(), 30);
+        assertEquals(kuvio.getPalat().size(), 2);
     }
+    
+    @Test
+    public void siirryToimiiKunSuuntaAlas(){
+        kuvio.lisaaPala(new Pala(0,0));
+        kuvio.lisaaPala(new Pala(30,30));
+        kuvio.siirry();
+        assertEquals(kuvio.getPalat().get(0).getY(), 30);
+        assertEquals(kuvio.getPalat().get(1).getY(), 60);
+    }
+    
+    
+    
+    
 }

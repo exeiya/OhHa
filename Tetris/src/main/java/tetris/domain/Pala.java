@@ -5,10 +5,19 @@ public class Pala {
     
     private int x;
     private int y;
+    private int vari;
     
     public Pala (int x, int y){
         this.x = x;
         this.y = y;
+    }
+    
+    public void setTyyppi(int tyyppi){
+        this.vari = tyyppi;
+    }
+    
+    public int getTyyppi(){
+        return vari;
     }
     
     public int getX(){
@@ -23,6 +32,7 @@ public class Pala {
          this.x += x;
          this.y += y;
     }
+    
     public void kaanna(int x, int y){
         int vanhaX = this.x;
         this.x = x - this.y + y;

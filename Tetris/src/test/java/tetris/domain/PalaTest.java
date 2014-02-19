@@ -67,6 +67,11 @@ public class PalaTest {
     }
     
     @Test
+    public void kaannaToimii(){
+        
+    }
+    
+    @Test
     public void toStringToimii(){
         assertEquals(pala.toString(), "10,10");
     }

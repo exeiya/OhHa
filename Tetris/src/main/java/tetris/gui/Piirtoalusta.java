@@ -2,7 +2,12 @@
 package tetris.gui;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import tetris.domain.Pala;
 import tetris.peli.Peli;
@@ -10,9 +15,27 @@ import tetris.peli.Peli;
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
     private Peli peli;
+    Image tausta;
+    List<Image> kuvat;
     
     public Piirtoalusta(Peli peli){
         this.peli = peli;
+        tausta = new ImageIcon(this.getClass().getResource("/tetris/resources/ttausta.png")).getImage();
+        Image sininen = new ImageIcon(this.getClass().getResource("/tetris/resources/sininen.png")).getImage();
+        Image pinkki = new ImageIcon(this.getClass().getResource("/tetris/resources/pinkki.png")).getImage();
+        Image lime = new ImageIcon(this.getClass().getResource("/tetris/resources/lime.png")).getImage();
+        Image punainen = new ImageIcon(this.getClass().getResource("/tetris/resources/punainen.png")).getImage();
+        Image keltainen = new ImageIcon(this.getClass().getResource("/tetris/resources/keltainen.png")).getImage();
+        Image liila = new ImageIcon(this.getClass().getResource("/tetris/resources/liila.png")).getImage();
+        Image oranssi = new ImageIcon(this.getClass().getResource("/tetris/resources/oranssi.png")).getImage();
+        kuvat = new ArrayList<>();
+        kuvat.add(sininen);
+        kuvat.add(lime);
+        kuvat.add(pinkki);
+        kuvat.add(keltainen);
+        kuvat.add(liila);
+        kuvat.add(oranssi);
+        kuvat.add(punainen);
     }
     
     @Override
@@ -22,13 +45,14 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.setColor(Color.blue);
+        
+        g.drawImage(tausta, 0, 0, this);
+        
         for(Pala pala : this.peli.getLiikkuvaKuvio().getPalat()){
-            g.fillRect(pala.getX(), pala.getY(), 30, 30);
+             g.drawImage(kuvat.get(pala.getTyyppi()), pala.getX(), pala.getY(), this);
         }
-        g.setColor(Color.red);
         for(Pala p : this.peli.getKentanPalat()){
-            g.fillRect(p.getX(), p.getY(), 30, 30);
+            g.drawImage(kuvat.get(p.getTyyppi()), p.getX(), p.getY(), this);
         }
     }
     

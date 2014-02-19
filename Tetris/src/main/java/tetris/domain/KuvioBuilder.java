@@ -14,6 +14,7 @@ public class KuvioBuilder {
     public Kuvio uusiKuvio(){
         int kuvionTyyppi = this.random.nextInt(7);
         Kuvio kuvio = new Kuvio();
+        kuvio.setTyyppi(kuvionTyyppi);
         if (kuvionTyyppi == 0){ //I
             int[] paikat0 = {150, 30, 150, 0, 150, 60, 150, 90};
             asetaPalat(kuvio, paikat0);

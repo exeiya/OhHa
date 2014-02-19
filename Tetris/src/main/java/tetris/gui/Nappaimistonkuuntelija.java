@@ -31,11 +31,22 @@ public class Nappaimistonkuuntelija implements KeyListener {
         return false;
     }
     
-    public boolean osuukoKaantyessa(){
+    public boolean osuukoKaantyessaPaloihin(){
         Kuvio testi = kuvio.luoTestikuvio();
         testi.kaanna();
         for (Pala pala : peli.getKentanPalat()){
             if (testi.osuuPalaan(pala)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean meneekoReunanYliKaantyessa(){
+        Kuvio testi = kuvio.luoTestikuvio();
+        testi.kaanna();
+        for(Pala pala : testi.getPalat()){
+            if (pala.getX() > 270 || pala.getX() < 0){
                 return true;
             }
         }
@@ -56,7 +67,10 @@ public class Nappaimistonkuuntelija implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         this.kuvio = peli.getLiikkuvaKuvio();
-        if (e.getKeyCode() == KeyEvent.VK_LEFT){
+        if (!peli.jatkuu()){
+            
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT){
                 if(!osuukoPaloihin(Suunta.VASEN) && !osuukoReunaan(0)){
                     this.kuvio.setSuunta(Suunta.VASEN);
                     this.peli.liikutaKuviota();
@@ -64,7 +78,7 @@ public class Nappaimistonkuuntelija implements KeyListener {
                 }
             
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+        else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
             if(!osuukoPaloihin(Suunta.OIKEA) && !osuukoReunaan(270)){
                 this.kuvio.setSuunta(Suunta.OIKEA);
                 this.peli.liikutaKuviota();
@@ -72,12 +86,12 @@ public class Nappaimistonkuuntelija implements KeyListener {
             }
 
         }
-        if (e.getKeyCode() == KeyEvent.VK_UP){
-            if(!osuukoKaantyessa()){ // TODO: ei käänny reunan yli!
+        else if (e.getKeyCode() == KeyEvent.VK_UP){
+            if(!osuukoKaantyessaPaloihin() && !meneekoReunanYliKaantyessa()){
                 kuvio.kaanna();
             }
         }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN){
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN){
             this.peli.liikutaKuviota();
         }
         

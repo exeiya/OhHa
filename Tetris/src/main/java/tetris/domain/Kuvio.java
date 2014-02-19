@@ -15,6 +15,7 @@ public class Kuvio {
     }
 
     public void lisaaPala(Pala pala) {
+        pala.setTyyppi(kuvionTyyppi);
         palat.add(pala);
     }
 
@@ -93,6 +94,14 @@ public class Kuvio {
     
     public Suunta getSuunta(){
         return this.suunta;
+    }
+    
+    public void setTyyppi(int kuvionTyyppi){
+        this.kuvionTyyppi = kuvionTyyppi;
+    }
+    
+    public int getTyyppi(){
+        return kuvionTyyppi;
     }
 
     public void tulosta() {
