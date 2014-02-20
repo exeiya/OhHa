@@ -21,7 +21,7 @@ public class Kayttoliittyma implements Runnable{
     public void run() {
         frame = new JFrame("Tetris");
         
-        frame.setPreferredSize(new Dimension(350,650));
+        frame.setPreferredSize(new Dimension(315,665));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         luoKomponentit(frame.getContentPane());

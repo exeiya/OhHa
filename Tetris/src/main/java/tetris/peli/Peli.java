@@ -16,6 +16,7 @@ public class Peli extends Timer implements ActionListener {
     private KuvioBuilder kuvionMuodostaja;
     private Paivitettava paivitettava;
     private int pisteet;
+    private boolean peliohi;
     
     public Peli() {
         super(1000, null);
@@ -24,6 +25,7 @@ public class Peli extends Timer implements ActionListener {
         this.kuvionMuodostaja = new KuvioBuilder();
         this.kuvio = null;
         this.pisteet = 0;
+        this.peliohi = false;
 
         lisaaKuvio();
 
@@ -37,12 +39,19 @@ public class Peli extends Timer implements ActionListener {
 
     public void peliOhi() {
         this.jatkuu = false;
+        this.peliohi = true;
+        stop();
+    }
+    
+    public boolean getPeliOhi(){
+        return this.peliohi;
     }
 
     public void liikutaKuviota() {
         if (this.kuvio.osuuPohjaan() || (osuuKentanPaloihin() && this.kuvio.getSuunta() == Suunta.ALAS)) {
             lisaaKentanPaloihin();
             lisaaKuvio();
+            pisteet += 5;
             tarkistaRivit();
         } else {
             this.kuvio.siirry();
@@ -90,12 +99,31 @@ public class Peli extends Timer implements ActionListener {
         }
         paivitettava.paivita();
     }
+    
+    public String getPisteet(){
+        return this.pisteet + "";
+    }
+    
+    public boolean osuukoUusiKentanPaloihin(Kuvio uusiKuvio){
+        Kuvio testikuvio = uusiKuvio.luoTestikuvio();
+        for (Pala pala : palatKentalla) {
+            if (testikuvio.osuuPalaan(pala)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void lisaaKuvio() {
-        this.kuvio = this.kuvionMuodostaja.uusiKuvio();
-        if (osuuKentanPaloihin()){
+        Kuvio uusiKuvio = this.kuvionMuodostaja.uusiKuvio();
+        if (osuukoUusiKentanPaloihin(uusiKuvio)){
+            this.kuvio = uusiKuvio;
+            System.out.println("ÖRR");
             peliOhi();
+        } else {
+            this.kuvio = uusiKuvio;
         }
+        
     }
 
     public boolean osuuKentanPaloihin() {
@@ -116,6 +144,18 @@ public class Peli extends Timer implements ActionListener {
             this.palatKentalla.add(pala);
         }
     }
+    
+    public void aloitaUudelleen(){
+        this.palatKentalla.clear();
+        this.jatkuu = true;
+        this.peliohi = false;
+        this.kuvio = null;
+        this.pisteet = 0;
+        
+        lisaaKuvio();
+        
+        start();
+    }
 
     public List<Pala> getKentanPalat() {
         return this.palatKentalla;
@@ -130,9 +170,7 @@ public class Peli extends Timer implements ActionListener {
         if (jatkuu) {
             liikutaKuviota();
             paivitettava.paivita();
-        } else {
-            stop();
-            System.out.println(pisteet);
+        } else if(peliohi) {
             paivitettava.paivita();
         }
         
