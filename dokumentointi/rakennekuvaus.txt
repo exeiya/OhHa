@@ -1,0 +1,13 @@
+Tetriksessä erilliset palat muodostetaan Pala-luokassa,
+jotka yhdistetään Kuvio-luokassa varsinaiseksi kuvioksi,
+joka liikkuu kentällä. Peli-luokassa on suurin osa
+varsinaisesta pelilogiikasta, ja se käyttää KuvioBuilderia
+uusien kuvioiden luontiin. KuvioBuilder luo kuviot peliin
+lisäämällä palat oikeisiin kohtiin ja antaa Peli-luokkaan
+uuden Kuvion.
+
+Käyttöliittymäpuolella Piirtoalusta toteuttaa kaiken grafiikan
+lisäyksen peliin. Käyttöliittymä-luokka tuo esille Piirtoalustan
+lataamat kuvat ja muodostaa peli-ikkunan. Näppäimistönkuuntelija
+odottaa näppäinten painalluksia näppäimistöltä ja toimii sinne
+lisätyn logiikan mukaisesti pelin edetessä.

@@ -1,0 +1,22 @@
+Testausdokumentaatio
+--------------------
+
+KuvioBuilder:
+Automaattisesti ei ole testattu jokaista mahdollista
+muodostettavaa kuviota, joita on seitsemän. Sen sijaan
+peliä pelatessa on tarkistettu että kaikkien erilaisten
+kuvioiden palat ovat oikeissa koordinaateissa. Pelkän pelaamisen
+lisäksi on palojen koordinaatteja testattu myös laittamalla
+välitulostuksia koodiin.
+
+Peli:
+Pisteiden lisäys on testattu pelatessa, sekä välitulostusten
+kanssa että ilman. Myös aktiivisen kuvion liikkuminen on testattu
+välitulostusten kanssa käsin, sillä suurin osa siihen liittyvästä
+logiikasta riippuu Kuvio-luokan metodeista, jotka testataan erikseen.
+
+Bugeja:
+Pelatessa on muutamia bugeja tullut esille, joista useammat on
+saatu korjattua. Edelleen on kuitenkin olemassa seuraavat bugit:
+- Kuviota pitäisi pystyä liikuttamaan vielä hetken ajan, kun se osuu
+  pohjaan

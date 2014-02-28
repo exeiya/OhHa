@@ -1,0 +1,9 @@
+
+Tetris toimii nuolinäppäimillä ja välilyönnillä:
+
+NUOLI YLÖSPÄIN	: kääntää tippuvaa kuviota
+NUOLI ALASPÄIN	: tiputtaa kuvion nopeampaa alas
+NUOLI VASEMMALLE: siirtää tippuvaa kuviota vasemmalle
+NUOLI OIKEALLE	: siirtää tippuvaa kuviota oikealla
+
+VÄLILYÖNTI	: aloittaa pelin alusta, kun gameover-ruutu on näkyvissä	
