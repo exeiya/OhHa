@@ -8,6 +8,12 @@ import tetris.Suunta;
 import tetris.domain.*;
 import tetris.gui.Paivitettava;
 
+/**
+ * Pelilogiikasta huolehtiva luokka
+ * 
+ * @author Krista
+ */
+
 public class Peli extends Timer implements ActionListener {
 
     private List<Pala> palatKentalla;
@@ -33,10 +39,17 @@ public class Peli extends Timer implements ActionListener {
         setInitialDelay(1000);
     }
 
+    /**
+     * Palauttaa jatkuuko peli edelleen vai ei.
+     * @return
+     */
     public boolean jatkuu() {
         return this.jatkuu;
     }
 
+    /**
+     * Metodi vaihtaa gameOverin päälle ja pysäyttää timerin.
+     */
     public void peliOhi() {
         this.jatkuu = false;
         this.peliohi = true;
@@ -47,17 +60,30 @@ public class Peli extends Timer implements ActionListener {
         return this.peliohi;
     }
 
+    /**
+     * Metodi, jota kutsumalla liikutetaan Kuviota ja tarkistetaan,
+     * osuuko se pohjaan, muihin paloihin tai jääkö se ylärajan yli.
+     */
     public void liikutaKuviota() {
         if (this.kuvio.osuuPohjaan() || (osuuKentanPaloihin() && this.kuvio.getSuunta() == Suunta.ALAS)) {
             lisaaKentanPaloihin();
-            lisaaKuvio();
-            pisteet += 5;
             tarkistaRivit();
+            if(onkoYliYlarajan()){
+                peliOhi();
+            } else {
+                lisaaKuvio();
+                pisteet += 5;
+            }
         } else {
             this.kuvio.siirry();
         }
     }
 
+    /**
+     * Tiputtaa kaikkia valitun rivin paloja
+     * yhden askeleen verran alemmaksi.
+     * @param rivi valittu rivi, jonka palat tiputetaan
+     */
     public void tiputaRivit(int rivi) {
         for (int i = rivi - 30; i > 0; i -= 30) {
             for (Pala pala : palatKentalla) {
@@ -68,6 +94,10 @@ public class Peli extends Timer implements ActionListener {
         }
     }
 
+    /**
+     * Poistaa valitun rivin palat.
+     * @param rivi rivi, jolta palat poistetaan
+     */
     public void poistaPalat(int rivi) {
         List<Pala> poistettavat = new ArrayList<>();
         for (Pala pala : palatKentalla) {
@@ -81,8 +111,13 @@ public class Peli extends Timer implements ActionListener {
         
     }
 
+    /**
+     * Metodi täysien rivien tarkistamiseen.
+     * Kerää täydet kentän rivit listaan.
+     */
     public void tarkistaRivit() {
         int monta = 0;
+        List<Integer> taydetRivit = new ArrayList<>();
         for (int i = 570; i > 0; i -= 30) {
             for (Pala pala : palatKentalla) {
                 if (pala.getY() == i) {
@@ -90,42 +125,47 @@ public class Peli extends Timer implements ActionListener {
                 }
             }
             if (monta == 10) {
-                poistaPalat(i);
-                pisteet += 10;
-                tiputaRivit(i);
+                taydetRivit.add(i);
+                
                 monta = 0;
             }
             monta = 0;
         }
+        Collections.reverse(taydetRivit);
+        for(int rivi : taydetRivit){
+            poistaPalat(rivi);
+            pisteet += 10;
+            tiputaRivit(rivi);
+        }
         paivitettava.paivita();
     }
-    
-    public String getPisteet(){
-        return this.pisteet + "";
-    }
-    
-    public boolean osuukoUusiKentanPaloihin(Kuvio uusiKuvio){
-        Kuvio testikuvio = uusiKuvio.luoTestikuvio();
-        for (Pala pala : palatKentalla) {
-            if (testikuvio.osuuPalaan(pala)) {
+    /**
+     * Tarkistaa, onko joku liikkuvan Kuvion
+     * Paloista kentän ylärajan yläpuolella.
+     * @return 
+     */
+    public boolean onkoYliYlarajan(){
+        for(Pala pala : kuvio.getPalat()){
+            if(pala.getY() < 0){
                 return true;
             }
         }
         return false;
     }
-
+    
+    /**
+     * Lisää uuden liikkuvan Kuvion kentälle.
+     */
     public void lisaaKuvio() {
-        Kuvio uusiKuvio = this.kuvionMuodostaja.uusiKuvio();
-        if (osuukoUusiKentanPaloihin(uusiKuvio)){
-            this.kuvio = uusiKuvio;
-            System.out.println("ÖRR");
-            peliOhi();
-        } else {
-            this.kuvio = uusiKuvio;
-        }
+        this.kuvio = kuvionMuodostaja.uusiKuvio();
         
     }
 
+    /**
+     * Metodi Kuvion törmäystarkistukseen.
+     * Tarkistaa, osuuko Kuvio mihinkään kentällä olevaan palaan.
+     * @return 
+     */
     public boolean osuuKentanPaloihin() {
         for (Pala pala : palatKentalla) {
             if (this.kuvio.osuuPalaan(pala)) {
@@ -135,16 +175,19 @@ public class Peli extends Timer implements ActionListener {
         return false;
     }
 
-    public Kuvio getLiikkuvaKuvio() {
-        return this.kuvio;
-    }
-
+    /**
+     * Lisää nykyisen tippuvan Kuvion palat kentällä olevien
+     * palojen listaan.
+     */
     public void lisaaKentanPaloihin() {
         for (Pala pala : this.kuvio.getPalat()) {
             this.palatKentalla.add(pala);
         }
     }
     
+    /**
+     * Aloittaa pelin uudelleen nollaamalla nykyisen pelin arvot.
+     */
     public void aloitaUudelleen(){
         this.palatKentalla.clear();
         this.jatkuu = true;
@@ -160,6 +203,14 @@ public class Peli extends Timer implements ActionListener {
     public List<Pala> getKentanPalat() {
         return this.palatKentalla;
     }
+    
+    public String getPisteet(){
+        return this.pisteet + "";
+    }
+    
+     public Kuvio getLiikkuvaKuvio() {
+        return this.kuvio;
+    }
 
     public void setPaivitettava(Paivitettava paivitettava) {
         this.paivitettava = paivitettava;
@@ -170,9 +221,8 @@ public class Peli extends Timer implements ActionListener {
         if (jatkuu) {
             liikutaKuviota();
             paivitettava.paivita();
-        } else if(peliohi) {
+        } else {
             paivitettava.paivita();
         }
-        
     }
 }

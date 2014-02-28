@@ -4,6 +4,12 @@ import javax.swing.SwingUtilities;
 import tetris.gui.Kayttoliittyma;
 import tetris.peli.Peli;
 
+/**
+ * Main pitää huolta pelin käynnistyksestä
+ * 
+ * @author Krista
+ */
+
 public class Main {
 
     public static void main(String[] args) {
@@ -17,7 +23,7 @@ public class Main {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex){
-                System.out.println("asd");
+                System.out.println("Piirtoalustaa ei ole luotu");
             }
         }
         

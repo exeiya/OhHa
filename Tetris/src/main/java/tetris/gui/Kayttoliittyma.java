@@ -7,6 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import tetris.peli.Peli;
 
+/**
+ * Käyttöliittymä-luokka luo peli-ikkunan ja
+ * lisää grafiikkaa hoitavan Piirtoalustan komponentteihin.
+ * 
+ * @author Krista
+ */
+
 public class Kayttoliittyma implements Runnable{
     
     private JFrame frame;

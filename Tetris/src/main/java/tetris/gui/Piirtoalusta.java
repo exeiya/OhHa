@@ -13,6 +13,14 @@ import javax.swing.JPanel;
 import tetris.domain.Pala;
 import tetris.peli.Peli;
 
+/**
+ * Piirtoalusta huolehtii graafisesta puolesta pelissä,
+ * lataa kaikken palojen kuvat, taustakuvan ja näyttää
+ * lisäksi pisteet.
+ * 
+ * @author Krista
+ */
+
 public class Piirtoalusta extends JPanel implements Paivitettava {
 
     private Peli peli;
@@ -22,15 +30,15 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
     
     public Piirtoalusta(Peli peli){
         this.peli = peli;
-        tausta = new ImageIcon(this.getClass().getResource("/tetris/resources/tausta.png")).getImage();
-        Image sininen = new ImageIcon(this.getClass().getResource("/tetris/resources/sininen.png")).getImage();
-        Image pinkki = new ImageIcon(this.getClass().getResource("/tetris/resources/pinkki.png")).getImage();
-        Image lime = new ImageIcon(this.getClass().getResource("/tetris/resources/lime.png")).getImage();
-        Image punainen = new ImageIcon(this.getClass().getResource("/tetris/resources/punainen.png")).getImage();
-        Image keltainen = new ImageIcon(this.getClass().getResource("/tetris/resources/keltainen.png")).getImage();
-        Image liila = new ImageIcon(this.getClass().getResource("/tetris/resources/liila.png")).getImage();
-        Image oranssi = new ImageIcon(this.getClass().getResource("/tetris/resources/oranssi.png")).getImage();
-        gameover = new ImageIcon(this.getClass().getResource("/tetris/resources/gameover.png")).getImage();
+        tausta = new ImageIcon(Piirtoalusta.class.getResource("/tausta.png")).getImage();
+        Image sininen = new ImageIcon(Piirtoalusta.class.getResource("/sininen.png")).getImage();
+        Image pinkki = new ImageIcon(Piirtoalusta.class.getResource("/pinkki.png")).getImage();
+        Image lime = new ImageIcon(Piirtoalusta.class.getResource("/lime.png")).getImage();
+        Image punainen = new ImageIcon(Piirtoalusta.class.getResource("/punainen.png")).getImage();
+        Image keltainen = new ImageIcon(Piirtoalusta.class.getResource("/keltainen.png")).getImage();
+        Image liila = new ImageIcon(Piirtoalusta.class.getResource("/liila.png")).getImage();
+        Image oranssi = new ImageIcon(Piirtoalusta.class.getResource("/oranssi.png")).getImage();
+        gameover = new ImageIcon(Piirtoalusta.class.getResource("/gameover.png")).getImage();
         kuvat = new ArrayList<>();
         kuvat.add(sininen);
         kuvat.add(lime);

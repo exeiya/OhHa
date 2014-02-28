@@ -18,6 +18,7 @@ public class PalaTest {
     @Before
     public void setUp() {
         pala = new Pala(10, 10);
+        pala.setTyyppi(1);
     }
     
     @After
@@ -68,7 +69,33 @@ public class PalaTest {
     
     @Test
     public void kaannaToimii(){
-        
+        pala.siirry(20, 20);
+        pala.kaanna(60, 60);
+        assertEquals(pala.getX(), 90);
+        assertEquals(pala.getY(), 30);
+    }
+    
+    @Test
+    public void osuuPalaanJosSamassaPaikassa(){
+        Pala pala2 = new Pala(10,10);
+        assertEquals(pala.osuuPalaan(pala2), true);
+    }
+    
+    @Test
+    public void eiOsuPalaanJosEriPaikassa(){
+        Pala pala2 = new Pala(20,20);
+        assertEquals(pala.osuuPalaan(pala2), false);
+    }
+    
+    @Test
+    public void setTyyppiToimii(){
+        pala.setTyyppi(2);
+        assertEquals(pala.getTyyppi(), 2);
+    }
+    
+    @Test
+    public void getTyyppiToimii(){
+        assertEquals(pala.getTyyppi(), 1);
     }
     
     @Test
